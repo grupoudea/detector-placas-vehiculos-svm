@@ -1,9 +1,9 @@
 no_placas/
 placas/
+no_placas_temp/
 positivos/
 negativos/
 negativos.zip
 positivos.zip
-placas.avi
-
+videos/*
 .idea/
