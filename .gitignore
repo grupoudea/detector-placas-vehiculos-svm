@@ -6,4 +6,7 @@ negativos/
 negativos.zip
 positivos.zip
 videos/*
+X_train.npy
+Y_train.npy
+
 .idea/
