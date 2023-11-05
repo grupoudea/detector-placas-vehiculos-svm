@@ -4,7 +4,7 @@ import cv2 as cv
 
 ruta_proyecto = os.getcwd()
 ruta_positivas = os.path.join(ruta_proyecto, 'positivos')
-ruta_negativas = os.path.join(ruta_proyecto, 'no_placas')
+ruta_negativas = os.path.join(ruta_proyecto, 'negativos')
 
 lista_positivas = os.listdir(ruta_positivas)
 lista_negativas = os.listdir(ruta_negativas)
