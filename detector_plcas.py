@@ -7,17 +7,17 @@ import cv2 as cv
 import joblib
 
 # cargar modelo
-loaded_model = joblib.load('modelo_entrenado.pkl')
+loaded_model = joblib.load('modelo_entrenado2.pkl')
 
 
 # Abre el video
-video_capture = cv.VideoCapture('./videos/placas4Atras.mp4')
+video_capture = cv.VideoCapture('./videos/placas.avi')
 fps = video_capture.get(cv.CAP_PROP_FPS)
 print(fps)
 
-window_width, window_height = 128, 64
+window_width, window_height = 64, 128
 
-win_size = (128, 64)
+win_size = (64, 128)
 block_size = (16, 16)
 block_stride = (8, 8)
 cell_size = (8, 8)
@@ -32,7 +32,9 @@ while True:
     if not ret:
         break
 
-    frame_gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
+    # frame_gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
+    frame_gray = frame
+
     x_detected, y_detected = 0, 0
     for y in range(0, frame_gray.shape[0] - win_size[1], int(win_size[1] / 2)):
         for x in range(0, frame_gray.shape[1] - win_size[0], int(win_size[0] / 2)):
@@ -46,11 +48,11 @@ while True:
             prediction = loaded_model.predict(window_reshape)
             # print(prediction)
             if prediction == 1:
-                # cv.imwrite(f"./no_placas_temp/placa_{contador}_{x}_{y}{extension}", window)
+                cv.imwrite(f"./no_placas_temp/placa_{contador}_{x}_{y}{extension}", window)
                 contador = contador + 1
                 x_detected, y_detected = x, y
-                # cv.imshow('Video_2', window)
-                cv.rectangle(frame, (x, y), (x + window_width, y + window_height), (0, 255, 0), 2)
+                cv.imshow('Video_2', window)
+                # cv.rectangle(frame, (x, y), (x + window_width, y + window_height), (0, 255, 0), 2)
 
     # cv.rectangle(frame, (x_detected, y_detected), (x_detected + window_width, y_detected + window_height), (0, 255, 0), 2)
     cv.imshow('Video', frame)
